@@ -48,6 +48,7 @@ class UsersController < ApplicationController
 
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "Require login to edit."
         redirect_to login_url
       end
@@ -55,7 +56,10 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      unless @user == current_user?(@user)
+      puts 'DEBUG'
+      puts @user.id
+      puts current_user.id
+      unless current_user?(@user)
         flash[:danger] = "Not permitted to edit other user's profile!"
         redirect_to(root_url) 
       end

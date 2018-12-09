@@ -27,4 +27,17 @@ module SessionsHelper
       user == current_user
     end
 
+    #if GET Request  then store the url trying to access
+    def store_location
+    	if request.get?
+    	  session[:forwarding_url] = request.original_url
+    	end
+    end
+
+    #Redirect to stored url if one exists else to default
+    def redirect_back_or(default)
+    	redirect_to(session[:forwarding_url] || default)
+    	session.delete(:forwarding_url)
+    end
+
 end
