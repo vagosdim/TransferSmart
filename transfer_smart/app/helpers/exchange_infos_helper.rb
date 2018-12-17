@@ -1,0 +1,2 @@
+module ExchangeInfosHelper
+end

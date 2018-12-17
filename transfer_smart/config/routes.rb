@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   post '/login',   to: 'sessions#create'
   delete '/logout',to: 'sessions#destroy'
 
+
+  post '/create_transfer', to: 'transfers#create'
+  get '/exchange_info', to: 'exchange_infos#new'
+
   resources :users
+  resources :transfers
+  resources :exchange_infos
 end
