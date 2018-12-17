@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transfer_id: 1
+  name: MyString
+  email: MyString
+  iban: MyString
+  bank_code: MyString
+  description: MyText
+
+two:
+  transfer_id: 1
+  name: MyString
+  email: MyString
+  iban: MyString
+  bank_code: MyString
+  description: MyText
