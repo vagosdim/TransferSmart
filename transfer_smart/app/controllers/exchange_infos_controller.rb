@@ -1,5 +1,10 @@
 class ExchangeInfosController < ApplicationController
 
+  def filled?
+    puts @exchange_info.sending_ammount
+  end
+  helper_method :filled?
+
 	def new
 		@exchange_info = ExchangeInfo.new
 	end
