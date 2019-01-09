@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+     <meta name="turbolinks-cache-control" content="no-preview">
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all',
                                               'data-turbolinks-track': 'true' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'true' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= tag :meta, name: :psj , action: action_name, controller: controller_name %>
     <%= render 'layouts/shim' %>
   </head>
   <body>

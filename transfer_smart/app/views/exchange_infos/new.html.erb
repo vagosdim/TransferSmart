@@ -1,7 +1,8 @@
 <h1>Exchange Rate Info</h1>
-<%= label 'myLabel', id: 'myLabel' %>
-<%= javascript_include_tag 'exchange_infos', 'data-turbolinks-track': 'true' %>
-<%= javascript_include_tag "exchange_infos.js" %>
+
+
+
+<div class="col-md-6 col-md-offset-3">
 <%= form_for(@exchange_info) do |f|%>
 	
 	<%= f.label :currency_from %>
@@ -18,7 +19,6 @@
      <%= f.label :receiving_ammount %>
      <%= f.text_field :receiving_ammount, class: 'form-control' %>
 
-  
-
      <%= f.submit "Continue", class: "btn btn-primary"%>
 <% end %>
+</div>
