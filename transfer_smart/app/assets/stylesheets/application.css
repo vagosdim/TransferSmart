@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require nprogress
+ *= require nprogress-bootstrap
  */
+
+$nprogress-color: #37c8c9;
+
+@import "nprogress";
+@import "nprogress-bootstrap";

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #Editing allowed only if logged in!
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :show]
   #Require correct user to edit not any user!!!
   before_action :correct_user, only: [:edit, :update]
 
