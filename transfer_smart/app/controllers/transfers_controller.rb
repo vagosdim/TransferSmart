@@ -9,6 +9,10 @@ class TransfersController < ApplicationController
 
 	end
 
+	def edit
+		@transfer = Transfer.find(session[:transfer_id])
+	end
+
 	private
 
 		def transfer_params

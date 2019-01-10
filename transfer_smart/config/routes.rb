@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   resources :recipient_infos
   get '/personal_info', to: 'personal_infos#new'
   get '/recipient_info', to: 'recipient_infos#new'
+  get '/transfer_summary', to: 'transfers#edit'
   
 end
