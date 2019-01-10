@@ -1,5 +1,4 @@
 class ExchangeInfosController < ApplicationController
-
   def filled?
     puts @exchange_info.sending_ammount
   end
@@ -14,7 +13,7 @@ class ExchangeInfosController < ApplicationController
         session[:transfer_id] = transfer.id
       end
     else
-      transfer = Transfer.find(session[:transfer_id])
+      @transfer = Transfer.find(session[:transfer_id])
     end  
 		@exchange_info = ExchangeInfo.new
 	end
@@ -24,8 +23,10 @@ class ExchangeInfosController < ApplicationController
     @exchange_info.transfer_id = session[:transfer_id]
   	if @exchange_info.save
         session[:exchange_info_id] = @exchange_info.id
+        @transfer = Transfer.find(session[:transfer_id])
+        @transfer.exchange_info_id = @exchange_info.id
   		#flash[:success] = "Welcome to TransferSmart"
-  		redirect_to root_path
+  		redirect_to '/personal_info'
   	    #handle successful signuo
   	else
     	render 'new'
