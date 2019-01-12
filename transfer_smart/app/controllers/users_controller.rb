@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
-      UserMailer.with(user: @user).welcome_email.deliver
+      #UserMailer.welcome_email(@user).deliver
       log_in @user
   		flash[:success] = "Welcome to TransferSmart"
   		redirect_to @user

@@ -1,14 +1,14 @@
 class UserMailer < ApplicationMailer
 
-  default from: 'notifications@example.com'
+  #default from: "transfersmart.developer@gmail.com"
  
-  def welcome_email
-    @user = params[:user]
-    @username = @user.email
-    puts @username 
-    puts 'DEBUG;\n\n\n'
-    @url  = 'https://transfersmart.pagekite.me'
-    mail(to: "myemail@mailinator.com", subject: 'Welcome to My Awesome Site')
+  def welcome_email(user)
+
+   @username = "Eirini Kaloudi"
+   @url = "localhost:3000"
+   @message = 'whatever you want to say here!'
+   mail( :to => user.email, :subject => "Thank you for registration")
+    
   end
 
 end
