@@ -19,5 +19,13 @@ Rails.application.routes.draw do
   get '/personal_info', to: 'personal_infos#new'
   get '/recipient_info', to: 'recipient_infos#new'
   get '/transfer_summary', to: 'transfers#edit'
-  
+  post '/curl_example', to: 'webhooks#receive'
+
+#match '/curl_example' => 'webhooks#receive', via: :get
 end
+
+#BackToBasics::Application.routes.draw do
+  
+ # match '/curl_example' => 'webhooks#curl_post_example', via: :post
+#end
+
