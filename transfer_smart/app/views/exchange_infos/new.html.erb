@@ -5,8 +5,9 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
   <%= form_for(@exchange_info) do |f|%>
+    <%= render 'shared/error_messages', obj: @exchange_info %>
 	
-	<%= f.label :currency_from %>
+	   <%= f.label :currency_from %>
      <%= f.select :currency_from, [' ','USD', 'EUR', 'GBP'], id: 'ccc', class: 'form-control' %>	
      <%= f.label :currency_to %>
      <%= f.select :currency_to, [' ','USD', 'EUR', 'GBP'], class: 'form-control' %>
@@ -17,7 +18,10 @@
      <%= f.text_field :sending_ammount, wrapper_html: {id: "rationcard"}, class: 'form-control' %>
 
      <%= f.label :receiving_ammount %>
-     <%= f.text_field :receiving_ammount, class: 'form-control' %>
+     <%= f.text_field :receiving_ammount,  :readonly => true, class: 'form-control'%>
+
+     <%= f.label :exchange_rate %>
+     <%= f.text_field :exchange_rate,  :readonly => true, class: 'form-control'%>
 
      <%= f.submit "Continue", class: "btn btn-primary"%>
 

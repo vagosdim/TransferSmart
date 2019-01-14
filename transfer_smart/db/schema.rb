@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_160509) do
+ActiveRecord::Schema.define(version: 2019_01_13_215832) do
 
   create_table "exchange_infos", force: :cascade do |t|
     t.integer "transfer_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_160509) do
     t.string "bank_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed"
   end
 
   create_table "users", force: :cascade do |t|

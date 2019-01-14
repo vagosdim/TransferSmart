@@ -4,7 +4,8 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-  <%= form_for(@recipient) do |f|%>
+  <%= form_for(@recipient_info) do |f|%>
+    <%= render 'shared/error_messages', obj: @recipient_info %>
 	
 	  <%= f.label :name %>
   	<%= f.text_field :name, class: 'form-control' %>

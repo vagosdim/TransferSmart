@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   get '/personal_info', to: 'personal_infos#new'
   get '/recipient_info', to: 'recipient_infos#new'
   get '/transfer_summary', to: 'transfers#edit'
-  post '/curl_example', to: 'webhooks#receive'
+  post '/webhook_response', to: 'webhooks#receive'
+  post '/webhook_response_2', to: 'webhooks#receive_2'
 
 #match '/curl_example' => 'webhooks#receive', via: :get
 end

@@ -13,7 +13,7 @@
 	    <ul class="list-group">
 	      <li class="list-group-item">1. Login to your internet bank.</li>
 		  <li class="list-group-item">2. Make a transfer from a bank account in .... name using details underneath.</li>
-		  <li class="list-group-item">3. Recipient receives EUR.</li>
+		  <li class="list-group-item">3. Recipient receives <%=@exchange_info.currency_to  %>.</li>
 	    </ul>
 	  </div>
 	  <center>
@@ -24,16 +24,63 @@
 	<div class="col-lg-6">
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
-	    	Instructions
+	    	Make the following transfer
 	    </div>
 	    <ul class="list-group">
-	      <li class="list-group-item">1. Login to your internet bank.</li>
-		  <li class="list-group-item">2. Make a transfer from a bank account in .... name using details underneath.</li>
-		  <li class="list-group-item">3. Recipient receives EUR.</li>
+	      <li class="list-group-item">
+	      	SENDER 
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;
+	      	<%=@user.name  %>
+	      </li>
+		  <li class="list-group-item">
+		  AMOUNT
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;
+	      	<%= @amount %>
+		  </li>
+		  <li class="list-group-item">
+		  	TO
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	TransferSmart
+		  </li>
+		  <li class="list-group-item">
+		  	ACCOUNT-TYPE
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	Savings-Account
+		  </li>
+		  <li class="list-group-item">
+		  	ACCOUNT
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	
+	      	Product_US - 000000010
+		  </li>
+
+		  <li class="list-group-item">
+		  	DESCRIPTION
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	
+	      	<%=@description  %>
+		  </li>
+		  <li class="list-group-item">
+		  OFFICE	
+		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+	      	
+	      TransferSmartOffice
+		  </li>
+
 	    </ul>
 	  </div>
 	  <center>
-	  	Any problems? If any step is not clear enough <%= link_to " click here", "url"  %>
+	  	Any problems? If any step is not clear enough <%= link_to " click here", "https://mifosforge.jira.com/wiki/spaces/docs/pages/73465980/How+to+Transfer+funds+from+a+Saving+Account"  %>
 	  </center>
     </div>
 

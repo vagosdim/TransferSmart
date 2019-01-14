@@ -3,7 +3,7 @@
     <%= link_to "TransferSmart", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
+        
         <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
           <li class="dropdown">
@@ -20,6 +20,7 @@
             </ul>
           </li>
         <% else %>
+          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>

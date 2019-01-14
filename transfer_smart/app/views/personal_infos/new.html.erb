@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
   <%= form_for(@personal_info) do |f|%>
+    <%= render 'shared/error_messages', obj: @personal_info  %>
 	
 	  <%= f.label :first_name %>
   	<%= f.text_field :first_name, class: 'form-control' %>
@@ -24,8 +25,8 @@
     <%= f.label :address %>
     <%= f.text_field :address, class: 'form-control' %>    
 
-    <%= f.label :postal_code %>
-    <%= f.text_field :postal_code, class: 'form-control' %>         
+    <%= f.label :name, 'Postal Code(optional)' %>
+    <%= f.text_field :postal_code, class: 'form-control' %>
 
     <%= f.submit "Continue", class: "btn btn-primary"%>
 
