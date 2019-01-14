@@ -72,3 +72,5 @@ config.action_mailer.smtp_settings = {
       :password       => ""
 } 
 end
+
+####################
