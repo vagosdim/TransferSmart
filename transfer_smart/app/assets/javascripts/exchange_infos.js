@@ -24,7 +24,7 @@ $( document ).on ('turbolinks:load',function(){
     	console.log("Getting Api Open-Exchange-Rates");
 		var currency_from = document.getElementById("exchange_info_currency_from");
 		var currency_to = document.getElementById("exchange_info_currency_to");
-        var url = 'https:openexchangerates.org/api/latest.json?';//'https://api.exchangeratesapi.io/latest?';//'
+        var url = 'https://openexchangerates.org/api/latest.json?';//'https://api.exchangeratesapi.io/latest?';//'
         var api_key = '2c02b1d3c85e4c7d88fbe5dd983d0965';
         var from, to;
         

@@ -2,81 +2,68 @@
 <%= render '/transfers/progress_bar' %>
 
 <div class="container" id="mypanel">
-  <h2>Transfer Review</h2>
+  <h3>Transfer Review</h3>
   
 <div class="row">
 	<div class="col-lg-6">
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
-	    	Instructions
+	    	Instructions:
 	    </div>
 	    <ul class="list-group">
 	      <li class="list-group-item">1. Login to your internet bank.</li>
-		  <li class="list-group-item">2. Make a transfer from a bank account in .... name using details underneath.</li>
-		  <li class="list-group-item">3. Recipient receives <%=@exchange_info.currency_to  %>.</li>
+		  <li class="list-group-item">2. Make a transfer from a bank account to 
+		  	<b>TransferSmart</b>
+		  	 using details on the right.</li>
+		  <li class="list-group-item">3. <b><%=@recipient_name%></b> receives <%=@exchange_info.currency_to  %>.</li>
 	    </ul>
 	  </div>
-	  <center>
-	  	<%= link_to "Initiate Transfer", current_user, class: "btn btn-lg btn-primary" %>
-	  </center>
+	  
+	  	View <%= link_to " transfer status ", current_user %>
+	    or <%= link_to " cancel the transfer ", ""  %>.
     </div>
 
 	<div class="col-lg-6">
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
-	    	Make the following transfer
+	    	Make the following transfer:
 	    </div>
 	    <ul class="list-group">
 	      <li class="list-group-item">
 	      	SENDER 
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;
-	      	<%=@user.name  %>
+	      	<div class=floatright> <%= @sender %> </div>
 	      </li>
+
 		  <li class="list-group-item">
 		  AMOUNT
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;
-	      	<%= @amount %>
+		  <div class=floatright> <%= @amount %> </div>
 		  </li>
+
 		  <li class="list-group-item">
 		  	TO
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	TransferSmart
+			<div class=floatright> TransferSmart </div>		  
 		  </li>
+
 		  <li class="list-group-item">
 		  	ACCOUNT-TYPE
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	Savings-Account
+		  <div class=floatright> Savings-Account </div>		  
+	      	
 		  </li>
+		  
 		  <li class="list-group-item">
 		  	ACCOUNT
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	
-	      	Product_US - 000000010
+		  	<div class=floatright> <%= @account  %> </div>		  
 		  </li>
 
 		  <li class="list-group-item">
 		  	DESCRIPTION
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	
-	      	<%=@description  %>
-		  </li>
-		  <li class="list-group-item">
-		  OFFICE	
-		  &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
-	      	
-	      TransferSmartOffice
+		  	<div class=floatright> <%=@description  %> </div>		  
 		  </li>
 
+		  <li class="list-group-item">
+		  OFFICE	
+	      <div class=floatright> TransferSmartOffice </div>		  
+		  </li>
 	    </ul>
 	  </div>
 	  <center>
