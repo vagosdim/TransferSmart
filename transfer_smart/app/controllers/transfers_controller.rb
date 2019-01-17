@@ -20,6 +20,19 @@ class TransfersController < ApplicationController
 
 	end
 
+	def show
+		@transfer = Transfer.find(params[:id])
+		respond_to do |format|
+			format.pdf { 
+				send_data(@transfer.receipt.render, 
+				filename: "#{@transfer.created_at.strftime("%Y-%m-%d")}-receipt.pdf",
+				type: "application/pdf", 
+			    disposition: :inline)
+		    }
+		end
+
+	end
+
 	private
 
 		def get_transfersmart_account_no(currency)
