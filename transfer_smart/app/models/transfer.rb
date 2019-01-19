@@ -6,28 +6,27 @@ class Transfer < ApplicationRecord
 
 
 	def receipt
+    exchange_info = ExchangeInfo.find(exchange_info_id)
+    amount_sent = exchange_info.sending_ammount
+    recipient = RecipientInfo.find(recipient_info_id)
     Receipts::Receipt.new(
       id: id,
-      subheading: "RECEIPT FOR CHARGE #%{id}",
-      product: "GoRails",
+      subheading: "RECEIPT FOR TRANSFER #%{id}",
+      product: "TransferSmart",
       company: {
-        name: "One Month, Inc.",
-        address: "37 Great Jones\nFloor 2\nNew York City, NY 10012",
-        email: "teachers@onemonth.com",
+        name: "TransferSmart, Inc.",
+        address: "University of Ioannina\nFloor 1\nIoannina Greece",
+        email: "transfersmart.developer@gmail.com",
         logo: Rails.root.join("app/assets/images/rails-logo.jpeg")
       },
       line_items: [
-        ["Date",           created_at.to_s],
-        ["Account Billed", "#{user.name} (#{user.email})"],
-        ["Product",        "GoRails"]
-        #["Amount",         "$#{amount / 100}.00"],
-        #["Charged to",     "#{card_type} (**** **** **** #{card_last4})"],
-        #["Transaction ID", uuid]
-      ]#,
-      #font: {
-       # bold: Rails.root.join('app/assets/fonts/tradegothic/TradeGothic-Bold.ttf'),
-        #normal: Rails.root.join('app/assets/fonts/tradegothic/TradeGothic.ttf'),
-      #}
+        ["Sender", "#{user.name} (#{user.email})"],
+        ["Recipient",        "#{recipient.name}"],
+        ["IBAN",         "#{recipient.iban}"],
+        ["Amount",     "#{amount_sent} #{exchange_info.currency_from}"],
+        ["Transfer Reference", "#{reference}"],
+        ["Date",           created_at.to_s]
+      ]
     )
   end
 

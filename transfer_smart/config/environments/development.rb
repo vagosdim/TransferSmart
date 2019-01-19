@@ -68,8 +68,8 @@ config.action_mailer.smtp_settings = {
       :address      => "smtp.gmail.com",
       :port          => "587",
       :authentication => :login,
-      :user_name      => "",
-      :password       => ""
+      :user_name      => "transfersmart.developer@gmail.com",
+      :password       => "myrailsemail2019"
 } 
 end
 

@@ -4,6 +4,8 @@ module WebhooksHelper
 	require 'openssl'
 	require 'json'
 
+
+
     def get_request(url)
 		uri = URI.parse(url)
 		request = Net::HTTP::Get.new(uri)
@@ -36,6 +38,7 @@ module WebhooksHelper
 		if(transfer)
 		  if(transfer.status == "Initiated")
 		  	find_recipient(transfer, server_address)
+		  	send_receipt(transfer)
 		  end
 		end
 	end
@@ -138,6 +141,12 @@ module WebhooksHelper
 
 		transfer.status = "Completed"
 		transfer.save
+	end
+
+
+	def send_receipt(transfer)
+		
+		UserMailer.transfer_email()
 	end
 
 end

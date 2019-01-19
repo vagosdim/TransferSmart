@@ -2,6 +2,8 @@ class TransfersController < ApplicationController
 	include SessionsHelper
 	include WebhooksHelper
 
+	#before_action :logged_in_user, only: [:edit, :show]
+
 	def edit
 		@transfer = Transfer.find(session[:transfer_id])
 		@transfer.status = "Initiated"
@@ -21,13 +23,14 @@ class TransfersController < ApplicationController
 	end
 
 	def show
-		@transfer = Transfer.find(params[:id])
+		@transfer = Transfer.find(1)#params[:id])
 		respond_to do |format|
 			format.pdf { 
 				send_data(@transfer.receipt.render, 
 				filename: "#{@transfer.created_at.strftime("%Y-%m-%d")}-receipt.pdf",
 				type: "application/pdf", 
-			    disposition: :inline)
+			    disposition: :inline,
+			    attachment: :inline)
 		    }
 		end
 
@@ -52,4 +55,12 @@ class TransfersController < ApplicationController
 
  			return transfer_smart_account["accountNo"].to_s
 		end
+
+		def logged_in_user
+      		unless logged_in?
+        	store_location
+        	flash[:danger] = "Require login to edit."
+        	redirect_to login_url
+      end
+    end
 end

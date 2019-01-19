@@ -8,11 +8,25 @@
       <%= link_to "Create Transfer!", '/exchange_info', class: "btn btn-lg btn-primary" %>
     </aside>
     <div class="col-md-8">
-    	<% if @user.transfers.any? %>
-    	<ol class="transfers">
-    		<%=render @transfers  %>
-    	</ol>
-    	<% end %>
+      <table class="table">
+        <thead>
+          <caption>US</caption>
+          <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transfers.each do |transfer| %>
+            <tr>
+              <td><%= transfer.reference %></td>
+              <td><%= transfer.user_id %></td>
+              <td><%= transfer.status%></td>
+            </tr>
+          <% end %>
+        </tbody>
+  </table>
     </div>
   </div>
 <% end %>
