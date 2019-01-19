@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  base: MyString
+  target_currency: MyString
+  convertion_to_base: 9.99
+  convertion_from_base: 9.99
+  percent_change: 9.99
+
+two:
+  base: MyString
+  target_currency: MyString
+  convertion_to_base: 9.99
+  convertion_from_base: 9.99
+  percent_change: 9.99

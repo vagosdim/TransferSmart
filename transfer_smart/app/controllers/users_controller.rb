@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include CurrencyHistoriesHelper
   #Editing allowed only if logged in!
   before_action :logged_in_user, only: [:edit, :update, :show]
   #Require correct user to edit not any user!!!
@@ -11,6 +12,9 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @transfers = @user.transfers
+    init_currency_history('USD')
+    @currencies = CurrencyHistory.all
+
   end
 
   def create

@@ -1,0 +1,2 @@
+class CurrencyHistory < ApplicationRecord
+end

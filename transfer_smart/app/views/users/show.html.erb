@@ -8,25 +8,38 @@
       <%= link_to "Create Transfer!", '/exchange_info', class: "btn btn-lg btn-primary" %>
     </aside>
     <div class="col-md-8">
+      <div class= "container-fluid">
+        
+      
       <table class="table">
+        <caption>Currencies based on USD 
+            <div class="floatright">
+              <%= DateTime.now %>
+            </div>
+          </caption>
         <thead>
-          <caption>US</caption>
+          
           <tr>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Price</th>
+            <th>US Dollar</th>
+            <th>1.00 USD</th>
+            <th>inv. 1.00 USD</th>
+            <th>Percent Change</th>
           </tr>
         </thead>
         <tbody>
-          <% @transfers.each do |transfer| %>
+          <% @currencies.each do |currency| %>
             <tr>
-              <td><%= transfer.reference %></td>
-              <td><%= transfer.user_id %></td>
-              <td><%= transfer.status%></td>
+              <td><%= currency.target_currency  %></td>
+              <td><%= currency.convertion_from_base%></td>
+              <td><%= currency.convertion_to_base%></td>
+              <td class="percent_change">
+                <%= currency.base+"/"+currency.target_currency%> &nbsp;
+                <%= currency.percent_change%>%</td>
             </tr>
           <% end %>
         </tbody>
   </table>
+    </div>
     </div>
   </div>
 <% end %>

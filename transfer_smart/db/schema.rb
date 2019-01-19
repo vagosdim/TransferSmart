@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_16_215829) do
+ActiveRecord::Schema.define(version: 2019_01_19_184952) do
+
+  create_table "currency_histories", force: :cascade do |t|
+    t.string "base"
+    t.string "target_currency"
+    t.decimal "convertion_to_base"
+    t.decimal "convertion_from_base"
+    t.decimal "percent_change"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "exchange_infos", force: :cascade do |t|
     t.integer "transfer_id"
