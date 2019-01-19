@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @transfers = @user.transfers
-    init_currency_history('USD')
+    init_currency_history('EUR')
     @currencies = CurrencyHistory.all
 
   end

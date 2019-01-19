@@ -12,7 +12,7 @@
         
       
       <table class="table">
-        <caption>Currencies based on USD 
+        <caption>Currencies based on EUR 
             <div class="floatright">
               <%= DateTime.now %>
             </div>
@@ -20,9 +20,9 @@
         <thead>
           
           <tr>
-            <th>US Dollar</th>
-            <th>1.00 USD</th>
-            <th>inv. 1.00 USD</th>
+            <th>EU Euro</th>
+            <th>1.00 EUR</th>
+            <th>inv. 1.00 EUR</th>
             <th>Percent Change</th>
           </tr>
         </thead>
@@ -30,11 +30,18 @@
           <% @currencies.each do |currency| %>
             <tr>
               <td><%= currency.target_currency  %></td>
-              <td><%= currency.convertion_from_base%></td>
-              <td><%= currency.convertion_to_base%></td>
-              <td class="percent_change">
-                <%= currency.base+"/"+currency.target_currency%> &nbsp;
-                <%= currency.percent_change%>%</td>
+              <td><%= sprintf('%.006f',currency.convertion_from_base) %></td>
+              <td><%= sprintf('%.006f',currency.convertion_to_base) %></td>
+              <td>
+                <%= currency.base+"/"+currency.target_currency%> &nbsp;&nbsp;
+                <b class="percent_change">
+                  <%if currency.percent_change > 0  %>
+                    +
+                  <% end %>
+                  <%= sprintf('%.006f', currency.percent_change) %>
+                 </b>%
+              </td>
+                
             </tr>
           <% end %>
         </tbody>
