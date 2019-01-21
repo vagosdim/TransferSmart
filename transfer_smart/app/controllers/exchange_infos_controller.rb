@@ -22,13 +22,10 @@ class ExchangeInfosController < ApplicationController
   	@exchange_info = ExchangeInfo.new(exchange_info_params)
     @exchange_info.transfer_id = session[:transfer_id]
   	if @exchange_info.save
-        #session[:exchange_info_id] = @exchange_info.id
         @transfer = Transfer.find(session[:transfer_id])
         @transfer.exchange_info_id = @exchange_info.id
         @transfer.save
-  		#flash[:success] = "Welcome to TransferSmart"
   		redirect_to '/personal_info'
-  	    #handle successful signuo
   	else
     	render 'new'
     end

@@ -19,8 +19,9 @@ class TransfersController < ApplicationController
 
 
 	def edit
-		@transfer = Transfer.find(session[:transfer_id])
-		@transfer.status = "Initiated"
+
+		@transfer = Transfer.find(params[:id])
+		@transfer.status = "Pending"
 		@transfer.save
 		@user = current_user
 		@exchange_info = ExchangeInfo.find(@transfer.exchange_info_id)
@@ -34,6 +35,16 @@ class TransfersController < ApplicationController
 		@amount = @exchange_info.sending_ammount.to_s+"\t"+@exchange_info.currency_from
 		@description = @transfer.reference
 
+	end
+
+
+	def update
+		@transfer = Transfer.find(params[:id])
+		if @transfer.update_attributes(status: "Initiated")		
+			redirect_to '/my_transfers'
+		else
+			render 'edit'
+		end
 	end
 
 	def show

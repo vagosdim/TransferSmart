@@ -18,9 +18,12 @@
 		  <li class="list-group-item">3. <b><%=@recipient_name%></b> receives <%=@exchange_info.currency_to  %>.</li>
 	    </ul>
 	  </div>
-	  
-	  	View <%= link_to " transfer status ", current_user %>
-	    or <%= link_to " cancel the transfer ", ""  %>.
+	  	<%= form_for(@transfer) do |f|  %>
+	  	 <%= f.submit "I HAVE SENT THE MONEY", name: "submit", class: "btn btn-primary" %>
+	  	<% end  %>
+	  	
+	    <center>or</center> 
+	    <center><%= link_to " Transfer the money later ", current_user  %></center>
     </div>
 
 	<div class="col-lg-6">

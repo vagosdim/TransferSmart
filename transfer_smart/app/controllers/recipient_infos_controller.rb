@@ -15,7 +15,7 @@ class RecipientInfosController < ApplicationController
       @transfer.recipient_info_id = @recipient_info.id
       create_unique_reference(@transfer)
       @transfer.save
-  	  redirect_to '/transfer_summary'
+  	  redirect_to '/transfer_summary', id: @transfer.id
    	else
       render 'new'
     end
