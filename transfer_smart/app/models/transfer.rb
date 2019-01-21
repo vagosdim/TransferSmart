@@ -1,8 +1,9 @@
 class Transfer < ApplicationRecord
+  scope :initiated, -> {where(status: 'Initiated')}
 	belongs_to :user
-	has_one :exchange_info
-	has_one :personal_info
-	has_one :recipient_info
+	has_one :exchange_info, :dependent => :destroy
+	has_one :personal_info, :dependent => :destroy
+	has_one :recipient_info, :dependent => :destroy
 
 
 	def receipt

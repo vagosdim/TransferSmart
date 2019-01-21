@@ -1,0 +1,47 @@
+<div class= "container-fluid">
+      <table class="table">
+        <h1>Transfer History</h1>
+        <thead>
+          <tr>
+            <th>Recipient</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Status</th>
+            <th>Created</th>
+     
+          </tr>
+        </thead>
+        <tbody>
+          <% @transfers.each do |t| %>
+            <tr>
+              <% if RecipientInfo.find_by(id: t.id) %>
+                <td><%= RecipientInfo.find(t.id).name  %></td>
+              <% else %>
+                <td> (None)</td>
+              <% end %>
+
+              <% if ExchangeInfo.find_by(id: t.id)  %>
+                <% e = ExchangeInfo.find(t.id)%>
+                <td> 
+                    <%= e.sending_ammount%>
+                </td>
+                <td>
+                 &nbsp; <%= e.currency_from%>
+                </td>
+              <% else %>
+                <td> </td><td> </td>
+              <% end %>
+
+              <td><%= t.status %></td>
+              <td><%= t.created_at %></td>
+              <% if t.status == "Completed" || t.status == "Initiated" %>  
+                <td> <%= link_to 'Receipt', transfer_path(t, :pdf)  %></td>
+              <% else %>
+                <td>
+                 <%= link_to 'Cancel', transfer_path(t.id), data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+  </table>
+    </div>

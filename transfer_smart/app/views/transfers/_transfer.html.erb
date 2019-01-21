@@ -1,8 +1,14 @@
-<li id="Transfer-<%= transfer.id %>">
-  
-  <span class="user"><%= link_to transfer.user.name, transfer.user %></span>
-  <span class="content"><%= transfer.reference %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(transfer.created_at) %> ago.
-  </span>
-</li>
+<% if transfer.status == "Pending" %>
+<%= link_to transfer_path(transfer.id, format: "pdf"), class: "list-group-item" do%>
+  <% if transfer.exchange_info_id %>
+  	<%= ExchangeInfo.find(transfer.exchange_info_id).sending_ammount%>
+  	&nbsp;
+  	<%= ExchangeInfo.find(transfer.exchange_info_id).currency_from%>
+  	<div class=floatright>
+  		to &nbsp;&nbsp;
+  		<%= RecipientInfo.find(transfer.recipient_info_id).name  %>	
+  	</div>
+  	
+  <% end %> 
+ <% end %>
+<% end %>

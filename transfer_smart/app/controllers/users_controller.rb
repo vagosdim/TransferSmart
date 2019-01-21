@@ -11,7 +11,12 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    if(session[:transfer_id])
+      Transfer.delete(session[:transfer_id])
+      session.delete(:transfer_id)
+    end
     @transfers = @user.transfers
+    @pending_transfers = @user.transfers.where(status: "Pending")
     init_currency_history('EUR')
     @currencies = CurrencyHistory.all
 
@@ -20,12 +25,10 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
-      @transfer = Transfer.find(1)
       UserMailer.welcome_email(@user).deliver_later
       log_in @user
   		flash[:success] = "Welcome to TransferSmart"
   		redirect_to @user
-  	    #handle successful signuo
   	else
     	render 'new'
     end
@@ -38,7 +41,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      #handle successful edit
       flash[:success] = "Profile updated successfuly"
       redirect_to @user
     else
@@ -63,9 +65,6 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      puts 'DEBUG'
-      puts @user.id
-      puts current_user.id
       unless current_user?(@user)
         flash[:danger] = "Not permitted to edit other user's profile!"
         redirect_to(root_url) 

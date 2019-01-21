@@ -13,10 +13,13 @@ No tests with EUR only with GBP and US!!!
 Need to change USD to US for the original API!!!!
 */
 
+
+
 $( document ).on ('turbolinks:load',function(){
 	if ($('meta[name=psj').attr('controller') != 'exchange_infos'){
 		return;
 	}
+
     receiving_ammount = document.getElementById("exchange_info_receiving_ammount");
     sending_ammount = document.getElementById("exchange_info_sending_ammount");
 

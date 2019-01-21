@@ -4,6 +4,20 @@ class TransfersController < ApplicationController
 
 	#before_action :logged_in_user, only: [:edit, :show]
 
+	def index
+		user = current_user
+		@transfers = user.transfers.order(created_at: :desc)
+	end
+
+	def destroy
+		@transfer = Transfer.find(params[:id])
+		@transfer.destroy
+		session.delete(:transfer_id)
+		redirect_to '/my_transfers'
+
+	end
+
+
 	def edit
 		@transfer = Transfer.find(session[:transfer_id])
 		@transfer.status = "Initiated"
@@ -23,7 +37,7 @@ class TransfersController < ApplicationController
 	end
 
 	def show
-		@transfer = Transfer.find(1)#params[:id])
+		@transfer = Transfer.find(params[:id])
 		respond_to do |format|
 			format.pdf { 
 				send_data(@transfer.receipt.render, 

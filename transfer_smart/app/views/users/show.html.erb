@@ -6,11 +6,28 @@
         <%= render 'shared/user_info' %>
       </section>
       <%= link_to "Create Transfer!", '/exchange_info', class: "btn btn-lg btn-primary" %>
+      <br>
+      <br>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <b><center>Pending Transfers</center></b>
+        </div>
+        <% if @pending_transfers.any? %>
+          <ul class="list-group">
+            <%= render @pending_transfers %>
+          </ul>
+        <% else %>
+          <ul class="list-group">
+            <center>(None)</center>
+          </ul>
+        <% end %>
+      </div>
+        <%= link_to "View All Transfers", '/my_transfers'  %>
+       
     </aside>
     <div class="col-md-8">
       <div class= "container-fluid">
-        
-      
       <table class="table">
         <caption>Currencies based on EUR 
             <div class="floatright">
