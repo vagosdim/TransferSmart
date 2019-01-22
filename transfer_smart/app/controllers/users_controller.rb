@@ -10,8 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    UserMailer.sender_email(27)
-    #UserMailer.recipient_email(27).deliver_later
   	@user = User.find(params[:id])
     if(session[:transfer_id])
       Transfer.delete(session[:transfer_id])
@@ -19,7 +17,7 @@ class UsersController < ApplicationController
     end
     @transfers = @user.transfers
     @pending_transfers = @user.transfers.where(status: "Pending")
-    init_currency_history('EUR')
+    init_currency_history('USD')
     @currencies = CurrencyHistory.all
 
   end
