@@ -3,18 +3,6 @@ var form_fields;
 var receiving_ammount;
 var sending_ammount;
 
-//CAUTION
-/*DO NOT DELETE THE COMMENTS!!!!!!
-
-USing Alternative api for testing only!!!!!!
-
-No tests with EUR only with GBP and US!!!
-
-Need to change USD to US for the original API!!!!
-*/
-
-
-
 $( document ).on ('turbolinks:load',function(){
 	if ($('meta[name=psj').attr('controller') != 'exchange_infos'){
 		return;
