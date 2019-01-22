@@ -1,5 +1,5 @@
 <% if transfer.status == "Pending" %>
-<%= link_to transfer_path(transfer.id, format: "pdf"), class: "list-group-item" do%>
+<%= link_to edit_transfer_path(transfer.id), class: "list-group-item" do%>
   <% if transfer.exchange_info_id %>
   	<%= ExchangeInfo.find(transfer.exchange_info_id).sending_ammount%>
   	&nbsp;
@@ -7,8 +7,7 @@
   	<div class=floatright>
   		to &nbsp;&nbsp;
   		<%= RecipientInfo.find(transfer.recipient_info_id).name  %>	
-  	</div>
-  	
+  	</div> 	
   <% end %> 
  <% end %>
 <% end %>

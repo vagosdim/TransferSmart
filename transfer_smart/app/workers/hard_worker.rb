@@ -1,6 +1,7 @@
 class HardWorker
   include Sidekiq::Worker
   include WebhooksHelper
+  include SessionsHelper
 
   def perform(transfer_id)
   	t = Transfer.find(transfer_id)

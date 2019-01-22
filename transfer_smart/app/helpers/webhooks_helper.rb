@@ -4,7 +4,7 @@ module WebhooksHelper
 	require 'openssl'
 	require 'json'
 
-
+	include SessionsHelper
 
     def get_request(url)
 		uri = URI.parse(url)
@@ -69,9 +69,8 @@ module WebhooksHelper
 				target_client = client
 			end
 		}
-		puts target_client
 
-		transfer_funds_to_recipient(transfer, target_server, target_client, accountId, description)
+		transfer_funds_to_recipient(transfer, target_server, target_client, accountId, description, recipient.email)
 
 	end
 
@@ -98,13 +97,12 @@ module WebhooksHelper
 	end
 
 
-	def transfer_funds_to_recipient(transfer, target_server, client, accountId, description)
+	def transfer_funds_to_recipient(transfer, target_server, client, accountId, description, recipient_email)
 
 		todays_transfer_date = Date.today.strftime("%d")+" "+Date.today.strftime("%B")+" "+Date.today.strftime("%Y")
 		exchange = ExchangeInfo.find(transfer.exchange_info_id)
 		amount = exchange.receiving_ammount.to_s
 		transfer_smart_client = get_transfer_smart_client(target_server+"clients?displayName=TransferSmart&pretty=true") 
-
 
 		transfer_smart_savings_account = get_transfer_smart_savings_account(target_server+"clients/"+
  			                                  transfer_smart_client["id"].to_s+
@@ -142,18 +140,15 @@ module WebhooksHelper
 		  http.request(request)
 		end
 
-		puts "DEBUG\n\n\n\n\n\n\n\n"
-		puts response.body
-
 		#Check if response is ok
 
 		transfer.status = "Completed"
 		transfer.save
 
-		#Delete thw Webhook item in db
-		#Send mail with receipt attached
-		#UserMailer.send(transfer.id)
+		webhook = Webhook.find_by(reference: transfer.reference)
+		Webhook.delete(webhook)
 
+		sender_email = PersonalInfo.find_by(transfer_id: transfer.id).email
+		ReceiptWorker.perform_async(transfer.id, sender_email, recipient_email)
 	end
-
 end

@@ -58,7 +58,7 @@ class TransfersController < ApplicationController
 		respond_to do |format|
 			format.pdf { 
 				send_data(@transfer.receipt.render, 
-				filename: "#{@transfer.created_at.strftime("%Y-%m-%d")}-receipt.pdf",
+				filename: "transfer-#{@transfer.id}-receipt.pdf",
 				type: "application/pdf", 
 			    disposition: :inline,
 			    attachment: :inline)
