@@ -14,14 +14,14 @@
         <tbody>
           <% @transfers.each do |t| %>
             <tr>
-              <% if RecipientInfo.find_by(id: t.id) %>
-                <td><%= RecipientInfo.find(t.id).name  %></td>
+              <% if RecipientInfo.find_by(id: t.recipient_info_id) %>
+                <td><%= RecipientInfo.find(t.recipient_info_id).name  %></td>
               <% else %>
                 <td> (None)</td>
               <% end %>
 
-              <% if ExchangeInfo.find_by(id: t.id)  %>
-                <% e = ExchangeInfo.find(t.id)%>
+              <% if ExchangeInfo.find_by(id: t.exchange_info_id)  %>
+                <% e = ExchangeInfo.find(t.exchange_info_id)%>
                 <td> 
                     <%= e.sending_ammount%>
                 </td>
@@ -38,7 +38,10 @@
                 <td> <%= link_to 'Receipt', transfer_path(t, :pdf)  %></td>
               <% else %>
                 <td>
-                 <%= link_to 'Cancel', transfer_path(t.id), data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+                 <%= link_to 'Cancel', transfer_path(t.id), data: {:confirm => 'Are you sure?'}, :method => :delete %>
+                   or
+                  <%= link_to 'Edit', edit_transfer_path(t.id) %>
+                 </td>
               <% end %>
             </tr>
           <% end %>

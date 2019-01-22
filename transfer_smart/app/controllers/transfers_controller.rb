@@ -19,8 +19,13 @@ class TransfersController < ApplicationController
 
 
 	def edit
-
-		@transfer = Transfer.find(params[:id])
+		@transfer = ""
+		if(params[:id])
+			@transfer = Transfer.find(params[:id])
+		else
+			@transfer = Transfer.find(session[:transfer_id])
+		end
+		session.delete(:transfer_id)
 		@transfer.status = "Pending"
 		@transfer.save
 		@user = current_user
@@ -42,6 +47,7 @@ class TransfersController < ApplicationController
 		@transfer = Transfer.find(params[:id])
 		if @transfer.update_attributes(status: "Initiated")		
 			redirect_to '/my_transfers'
+			HardWorker.perform_async(@transfer.id)
 		else
 			render 'edit'
 		end

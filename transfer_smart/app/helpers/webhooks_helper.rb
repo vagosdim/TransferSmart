@@ -34,17 +34,17 @@ module WebhooksHelper
 		pretty_json = JSON.pretty_generate(parsed_json)
 
 		ref = parsed_json["transferDescription"].to_s
-		transfer = Transfer.find_by(reference: ref)
-		if(transfer)
-		  if(transfer.status == "Initiated")
-		  	find_recipient(transfer, server_address)
-		  	send_receipt(transfer)
-		  end
-		end
+		if(ref.bytesize == 16)
+			webhook = Webhook.new(savings: data["resourceId"].to_i,
+								  endpoint: server_address,
+								  reference: ref)
+			webhook.save
+		end		
 	end
 
 	def find_recipient(transfer, server_address)
 		target_server = server_address.clone
+
 		if(server_address.include?("10.0.3.148"))
 			target_server.sub!("148", "233" )
 		elsif (server_address.include?("10.0.3.233"))
@@ -69,6 +69,8 @@ module WebhooksHelper
 				target_client = client
 			end
 		}
+		puts target_client
+
 		transfer_funds_to_recipient(transfer, target_server, target_client, accountId, description)
 
 	end
@@ -110,6 +112,7 @@ module WebhooksHelper
 			
 
 		uri = URI.parse(target_server+"accounttransfers")
+
 		request = Net::HTTP::Post.new(uri)
 		request.content_type = "application/json"
 		request["Fineract-Platform-Tenantid"] = "default"
@@ -127,7 +130,7 @@ module WebhooksHelper
 		  "locale" => "en",
 		  "transferDate" => todays_transfer_date,
 		  "transferAmount" => amount,
-		  "transferDescription" => description
+		  "transferDescription" => description + "\t TransferSmart, Inc"
 		})
 
 		req_options = {
@@ -139,14 +142,18 @@ module WebhooksHelper
 		  http.request(request)
 		end
 
+		puts "DEBUG\n\n\n\n\n\n\n\n"
+		puts response.body
+
+		#Check if response is ok
+
 		transfer.status = "Completed"
 		transfer.save
-	end
 
+		#Delete thw Webhook item in db
+		#Send mail with receipt attached
+		#UserMailer.send(transfer.id)
 
-	def send_receipt(transfer)
-		
-		UserMailer.transfer_email()
 	end
 
 end
