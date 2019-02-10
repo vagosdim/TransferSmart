@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     def receive
   	  data = params.as_json
       if request.headers["Content-Type"].include?("application/json")
-        if request.headers["X-Fineract-Endpoint"].include?("10.0.3.148")
+        if request.headers["X-Fineract-Endpoint"].include?("10.0.3.149")
           	puts "Received webhook from TransferSmart-US."
    		    	
         elsif request.headers["X-Fineract-Endpoint"].include?("10.0.3.233")

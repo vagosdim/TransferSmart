@@ -23,7 +23,8 @@ module CurrencyHistoriesHelper
 	end
 
 	def init_currency_history(base)
-		if(CurrencyHistory.all.count == 0)
+		if(CurrencyHistory.count == 0 or CurrencyHistory.first.updated_at.strftime("%d") != (DateTime.now - 2.hours).strftime("%d"))
+			CurrencyHistory.delete_all
 			today = DateTime.now
 			today = today.strftime("%Y-%d-%m")
 			interesting_currencies = ['BTC','SEK', 'GBP', 'JPY', 'AUD', 'CAD', 'CNY', 'CHF', 'EUR', 'HKD']
@@ -46,7 +47,7 @@ module CurrencyHistoriesHelper
 
 	def calculate_variance
 		interesting_currencies = ['SEK', 'BTC', 'GBP', 'JPY', 'AUD', 'CAD', 'CNY', 'CHF', 'EUR', 'HKD']
-		yesterday = DateTime.now - 7.days
+		yesterday = DateTime.now - 1.days
 		yesterday = yesterday.strftime("%Y-%m-%d")
 		
 		api_key = 'app_id=2c02b1d3c85e4c7d88fbe5dd983d0965'

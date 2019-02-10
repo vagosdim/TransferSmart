@@ -13,10 +13,10 @@
     <%= f.label :email %>
     <%= f.text_field :email, class: 'form-control' %>    
 
-    <%= f.label(:iban, 'IBAN') %>
+    <%= f.label(:iban, 'IBAN or Routing Number') %>
     <%= f.text_field :iban, class: 'form-control' %>
 
-    <%= f.label :bank_code %>
+    <%= f.label(:bank_code, 'Bank code (BIC/SWIFT)') %>
     <%= f.text_field :bank_code, class: 'form-control' %>    
 
     <%= f.label :description %>

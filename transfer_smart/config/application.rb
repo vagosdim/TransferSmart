@@ -23,33 +23,6 @@ module TransferSmart
     if defined?(Rails::Server)
   		config.after_initialize do
 
-  			interesting_currencies = ['SEK', 'BTC', 'GBP', 'JPY', 'AUD', 'CAD', 'CNY', 'CHF', 'EUR', 'HKD']
-			yesterday = DateTime.now - 7.days
-			yesterday = yesterday.strftime("%Y-%m-%d")
-		
-			api_key = 'app_id=2c02b1d3c85e4c7d88fbe5dd983d0965'
-			uri = URI.parse('https://openexchangerates.org/api/historical/'+yesterday+'.json?'+api_key)
-			request = Net::HTTP::Get.new(uri)
-			req_options = {
-				use_ssl: uri.scheme == "https",
-				verify_mode: OpenSSL::SSL::VERIFY_NONE,
-			}
-
-			response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-				http.request(request)
-			end
-
-			parsed_json = JSON.parse(response.body)
-			pretty_json = JSON.pretty_generate(parsed_json)
-
-			interesting_currencies.each do |currency|
-				tmp = parsed_json["rates"][currency]
-				currency = CurrencyHistory.find_by(target_currency: currency)
-				if(currency)
-					currency.percent_change = ((currency.convertion_from_base - tmp)/100.0)
-					currency.save
-				end
-			end
   		end
 	end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_182427) do
+ActiveRecord::Schema.define(version: 2019_02_10_204440) do
 
   create_table "currency_histories", force: :cascade do |t|
     t.string "base"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2019_01_21_182427) do
     t.integer "exchange_info_id"
     t.integer "account_number"
     t.string "reference"
-    t.string "bank_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"

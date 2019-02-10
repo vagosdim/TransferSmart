@@ -28,14 +28,26 @@
     </aside>
     <div class="col-md-8">
       <div class= "container-fluid">
-      <table class="table">
-        <caption>Currencies based on USD
+      <table id="currencies", class="table">
+        <caption class="floatleft">Select base currency:
+            <select id="base-currency">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="AUD">AUD</option>
+              <option value="BTC">BTC</option>
+              <option value="CAD">CAD</option>
+              <option value="CHF">CHF</option>
+              <option value="CNY">CNY</option>
+              <option value="GBP">GBP</option>
+              <option value="HKD">HKD</option>
+              <option value="JPY">JPY</option>
+              <option value="SEK">SEK</option>
+            </select>
             <div class="floatright">
-              <%= DateTime.now %>
+              <%= DateTime.now.strftime('%Y-%m-%d  %H:%M') %>
             </div>
           </caption>
         <thead>
-          
           <tr>
             <th>US Dollar </th>
             <th>1.00 USD</th>

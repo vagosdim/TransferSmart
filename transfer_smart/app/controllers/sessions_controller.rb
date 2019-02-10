@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
   		#log in user and redirect to show
   	else
   		flash.now[:danger] = 'Invalid email/password combination'
-  	    #because there is no redirect we use flash.now so as not to display message two times.Render does not count as a request
-  		render 'new' #to not block the login button --> Refresh page!
+  		render 'new'
 
   	end
   end

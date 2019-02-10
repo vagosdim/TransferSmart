@@ -8,9 +8,9 @@
     <%= render 'shared/error_messages', obj: @exchange_info %>
 	
 	   <%= f.label :currency_from %>
-     <%= f.select :currency_from, [' ','USD', 'EUR', 'GBP'], id: 'ccc', class: 'form-control' %>	
+     <%= f.select :currency_from, [' ','USD', 'EUR'], id: 'ccc', class: 'form-control' %>	
      <%= f.label :currency_to %>
-     <%= f.select :currency_to, [' ','USD', 'EUR', 'GBP'], class: 'form-control' %>
+     <%= f.select :currency_to, [' ','USD', 'EUR'], class: 'form-control' %>
      <% if filled? %>
           <%  %>
  	<% end %>

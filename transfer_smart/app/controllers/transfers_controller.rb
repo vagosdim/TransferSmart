@@ -36,7 +36,7 @@ class TransfersController < ApplicationController
 		@sender = sender.first_name + " " + sender.last_name
 
 		@account = @exchange_info.currency_from[0, @exchange_info.currency_from.length - 1] +
-		            "-01-" + get_transfersmart_account_no(@exchange_info.currency_from)
+		            "-01-" + get_transfersmart_account_no(@recipient.bank_code)
 		@amount = @exchange_info.sending_ammount.to_s+"\t"+@exchange_info.currency_from
 		@description = @transfer.reference
 
@@ -60,8 +60,7 @@ class TransfersController < ApplicationController
 				send_data(@transfer.receipt.render, 
 				filename: "transfer-#{@transfer.id}-receipt.pdf",
 				type: "application/pdf", 
-			    disposition: :inline,
-			    attachment: :inline)
+			    disposition: :inline)
 		    }
 		end
 
@@ -69,13 +68,13 @@ class TransfersController < ApplicationController
 
 	private
 
-		def get_transfersmart_account_no(currency)
+		def get_transfersmart_account_no(bank_code)
 			server = "https://10.0.3.COUNTRY:443/fineract-provider/api/v1/"
 			url = "https://10.0.3.COUNTRY:443/fineract-provider/api/v1/clients?displayName=TransferSmart"
-			if(currency == "USD")
-				url.sub!("COUNTRY", "148")
-				server.sub!("COUNTRY", "148")
-			elsif(currency == "EUR")
+			if(bank_code == "MFBNUSNY")
+				url.sub!("COUNTRY", "149")
+				server.sub!("COUNTRY", "149")
+			elsif(bank_code == "MFBNEUAA")
 				url.sub!("COUNTRY", "233")
 				server.sub!("COUNTRY", "233")
 			end

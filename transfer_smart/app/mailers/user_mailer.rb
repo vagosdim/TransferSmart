@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   include SessionsHelper
-  
+  require 'open-uri'
   default from: "transfersmart.developer@gmail.com"
  
   def welcome_email(user)
@@ -19,10 +19,9 @@ class UserMailer < ApplicationMailer
     mail( :to => sender, :subject => "Receipt for your payment")
   end
 
-  def recipient_email(id, file, recipient)
+  def recipient_email(id, file, recipient, message)
     
-    recipient_email = RecipientInfo.find_by(transfer_id: id).email
-    @message = PersonalInfo.find_by(transfer_id: id).email
+    @message = message
     attachments["receipt.pdf"] = file
     mail( :to => recipient, :subject => "Received money via TransferSmart")
   end
