@@ -8,7 +8,7 @@ class Transfer < ApplicationRecord
 
 	def receipt
     exchange_info = ExchangeInfo.find(exchange_info_id)
-    amount_sent = exchange_info.sending_ammount
+    amount_sent = exchange_info.sending_amount
     recipient = RecipientInfo.find(recipient_info_id)
     Receipts::Receipt.new(
       id: id,

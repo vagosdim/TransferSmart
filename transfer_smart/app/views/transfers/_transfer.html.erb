@@ -1,7 +1,7 @@
 <% if transfer.status == "Pending" %>
 <%= link_to edit_transfer_path(transfer.id), class: "list-group-item" do%>
   <% if transfer.exchange_info_id %>
-  	<%= ExchangeInfo.find(transfer.exchange_info_id).sending_ammount%>
+  	<%= ExchangeInfo.find(transfer.exchange_info_id).sending_amount%>
   	&nbsp;
   	<%= ExchangeInfo.find(transfer.exchange_info_id).currency_from%>
   	<div class=floatright>

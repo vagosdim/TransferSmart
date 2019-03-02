@@ -35,6 +35,7 @@ module WebhooksHelper
 		pretty_json = JSON.pretty_generate(parsed_json)
 
 		ref = parsed_json["transferDescription"].to_s
+		ref = ref.delete(" ")
 		if(ref.bytesize == 16)
 			webhook = Webhook.new(savings: data["resourceId"].to_i,
 								  endpoint: server_address,

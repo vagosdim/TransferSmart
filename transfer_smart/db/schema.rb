@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_204440) do
+ActiveRecord::Schema.define(version: 2019_02_19_222542) do
 
   create_table "currency_histories", force: :cascade do |t|
     t.string "base"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2019_02_10_204440) do
 
   create_table "exchange_infos", force: :cascade do |t|
     t.integer "transfer_id"
-    t.decimal "sending_ammount"
-    t.decimal "receiving_ammount"
+    t.decimal "sending_amount"
+    t.decimal "receiving_amount"
     t.string "currency_from"
     t.string "currency_to"
     t.decimal "exchange_rate"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2019_02_10_204440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.index ["id"], name: "index_transfers_on_id"
+    t.index ["reference"], name: "index_transfers_on_reference"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,7 +77,6 @@ ActiveRecord::Schema.define(version: 2019_02_10_204440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "webhooks", force: :cascade do |t|
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_02_10_204440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reference"
+    t.index ["reference"], name: "index_webhooks_on_reference"
   end
 
 end

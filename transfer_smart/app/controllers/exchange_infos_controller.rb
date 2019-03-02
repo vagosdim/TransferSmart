@@ -1,6 +1,6 @@
 class ExchangeInfosController < ApplicationController
   def filled?
-    puts @exchange_info.sending_ammount
+    puts @exchange_info.sending_amount
   end
   helper_method :filled?
 
@@ -34,6 +34,6 @@ class ExchangeInfosController < ApplicationController
   private
 
   	def exchange_info_params
-    	params.require(:exchange_info).permit(:sending_ammount, :receiving_ammount, :currency_from, :currency_to, :exchange_rate)
+    	params.require(:exchange_info).permit(:sending_amount, :receiving_amount, :currency_from, :currency_to, :exchange_rate)
     end
 end

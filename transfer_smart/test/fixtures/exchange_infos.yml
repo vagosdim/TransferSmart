@@ -2,16 +2,16 @@
 
 one:
   transfer_id: 1
-  sending_ammount: 9.99
-  receiving_ammount: 9.99
+  sending_amount: 9.99
+  receiving_amount: 9.99
   currency_from: MyString
   currency_to: MyString
   exchange_rate: 9.99
 
 two:
   transfer_id: 1
-  sending_ammount: 9.99
-  receiving_ammount: 9.99
+  sending_amount: 9.99
+  receiving_amount: 9.99
   currency_from: MyString
   currency_to: MyString
   exchange_rate: 9.99

@@ -27,12 +27,11 @@ module CurrencyHistoriesHelper
 			CurrencyHistory.delete_all
 			today = DateTime.now
 			today = today.strftime("%Y-%d-%m")
-			interesting_currencies = ['BTC','SEK', 'GBP', 'JPY', 'AUD', 'CAD', 'CNY', 'CHF', 'EUR', 'HKD']
+			interesting_currencies = ['BTC','SEK', 'GBP', 'JPY', 'AUD', 'CAD', 'CNY', 'CHF', 'EUR', 'HKD', 'USD']
 			symbols = interesting_currencies.join(",")
 			app_key = 'app_id=2c02b1d3c85e4c7d88fbe5dd983d0965'
 			url = 'https://openexchangerates.org/api/latest.json?'+app_key+"&symbols="+symbols
 			parsed_json = get_currencies(url)
-			puts url
 			parsed_json["rates"].each do |key, value|
 				currency_history = CurrencyHistory.new(
 					base: base, target_currency: key,

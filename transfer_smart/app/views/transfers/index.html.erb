@@ -23,7 +23,7 @@
               <% if ExchangeInfo.find_by(id: t.exchange_info_id)  %>
                 <% e = ExchangeInfo.find(t.exchange_info_id)%>
                 <td> 
-                    <%= e.sending_ammount%>
+                    <%= e.sending_amount%>
                 </td>
                 <td>
                  &nbsp; <%= e.currency_from%>

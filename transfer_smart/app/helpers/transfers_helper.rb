@@ -31,10 +31,10 @@ module TransfersHelper
 
 
 	def transfer_funds_to_recipient(transfer, target_server, client, accountId, description, recipient_email)
-
+		account_type = 2
 		todays_transfer_date = Date.today.strftime("%d")+" "+Date.today.strftime("%B")+" "+Date.today.strftime("%Y")
 		exchange = ExchangeInfo.find(transfer.exchange_info_id)
-		amount = exchange.receiving_ammount.to_s
+		amount = exchange.receiving_amount.to_s
 		transfer_smart_client = get_transfer_smart_client(target_server+"clients?displayName=TransferSmart&pretty=true") 
 
 		transfer_smart_savings_account = get_transfer_smart_savings_account(target_server+"clients/"+
@@ -51,11 +51,11 @@ module TransfersHelper
 		request.body = JSON.dump({
 		  "fromOfficeId" => transfer_smart_client["officeId"].to_i,
 		  "fromClientId" => transfer_smart_client["id"].to_i,
-		  "fromAccountType" => 2,
+		  "fromAccountType" => account_type,
 		  "fromAccountId" => transfer_smart_savings_account["id"].to_i,
 		  "toOfficeId" => client["officeId"].to_i,
 		  "toClientId" => client["id"].to_i,
-		  "toAccountType" => 2,
+		  "toAccountType" => account_type,
 		  "toAccountId" => accountId.to_i,
 		  "dateFormat" => "dd MMMM yyyy",
 		  "locale" => "en",
@@ -72,16 +72,12 @@ module TransfersHelper
 		response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
 		  http.request(request)
 		end
-
-		#Check if response is ok
-
-		transfer.status = "Completed"
-		transfer.save
-
-		webhook = Webhook.find_by(reference: transfer.reference)
-		Webhook.delete(webhook)
-
-		sender_email = PersonalInfo.find_by(transfer_id: transfer.id).email
-		ReceiptWorker.perform_async(transfer.id, sender_email, recipient_email)
+		if (response.kind_of? Net::HTTPSuccess)
+			transfer.status = "Completed"
+			transfer.save
+			webhook = Webhook.find_by(reference: transfer.reference)
+			Webhook.delete(webhook)
+		end
+		#ReceiptWorker.perform_async(transfer.id, sender_email, recipient_email)
 	end
 end
